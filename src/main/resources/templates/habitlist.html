@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Habits</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Daily Habits</h1>
+	
+	<div>
+		<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+	</div>
+	
+	<div>
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out"/>
+		</form>
+	</div>
+	
+    <table>
+		<tr>
+		    <th>Name</th>
+		    <th>Description</th>
+		    <th>Category</th>
+		</tr>  
+    	<tr th:each = "habit : ${habits}">
+    		<td th:text="${habit.name}"></td>
+    		<td th:text="${habit.description}"></td>
+    		<td th:text="${habit.category.name}"></td>
+    			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${habit.id})}">Delete</a></td>
+    			<td><a th:href="@{/edithabit/{id}(id=${habit.id})}">Edit</a></td>
+    	</tr>
+     </table>
+     <a href="/add">Add Habit</a> 	
+</body>
+</html>

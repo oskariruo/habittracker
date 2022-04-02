@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Habits</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Add Habit</h1>
+	<div>
+		<form  th:object="${habit}" th:action="@{save}" action="#" method="post">
+		  	<label for="hname">Name</label>
+			<input type="text" id="hname" th:field="*{name}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="hDescription">Description</label>
+			<input type="text" id="hDescription" th:field="*{description}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="catlist">Category</label>
+			<select id="catlist" th:field="*{category.categoryid}" class="form-control">
+				<option
+					th:each="cat: ${categories}"
+					th:value="${cat.categoryid}"
+					th:text="${cat.name}"
+					></option>
+					</select>
+			<input type="submit" value="Save"></input>
+		</form>
+	</div>
+</body>
+</html>
