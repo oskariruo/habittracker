@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.example.habittracker.web.UserDetailServiceImp;
+import com.example.habittracker.web.UserDetailServiceImpl;
 
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
@@ -18,23 +18,27 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    private UserDetailServiceImp userDetailsService;	
+    private UserDetailServiceImpl userDetailsService;	
 	
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-        .authorizeRequests().antMatchers("/css/**").permitAll()
+        .authorizeRequests()
+        .antMatchers("/signup**", "/js/**", "/css/**", "/img/**")
+        .permitAll()
         .and()
         .authorizeRequests()
           .antMatchers("/deletehabit").hasRole("ADMIN")
           .anyRequest().authenticated()
           .and()
-      .formLogin()
-          .defaultSuccessUrl("/habitlist", true)
-          .permitAll()
-          .and()
-      .logout()
-          .permitAll();
+          	.formLogin()
+          	.loginPage("/login")
+          	.permitAll()
+          		.defaultSuccessUrl("/habitlist", true)
+          		.permitAll()
+          			.and()
+          			.logout()
+          			.permitAll();
     }
     
     @Autowired

@@ -22,15 +22,22 @@ public class Habit {
 	@JoinColumn(name = "categoryid")
 	@JsonManagedReference
 	private Category category;
-
+	
+	@ManyToOne
+	@JoinColumn(name = "difficultyid")
+	@JsonManagedReference
+	private Difficulty difficulty;
+	
 	public Habit() {
 		super();
 	}
 
-	public Habit(String name, String description, Category category) {
+	public Habit(String name, String description, Category category, Difficulty difficulty) {
 		this.name = name;
 		this.description = description;
-		this.category = category;
+		this.category= category;
+		this.difficulty = difficulty;
+		
 	}
 
 	public Long getId() {
@@ -65,9 +72,20 @@ public class Habit {
 		this.category = category;
 	}
 
+	
+	public Difficulty getDifficulty() {
+		return difficulty;
+	}
+
+	public void setDifficulty(Difficulty difficulty) {
+		this.difficulty = difficulty;
+	}
+
 	@Override
 	public String toString() {
-		return "Habit [id=" + id + ", name=" + name + ", description=" + description + ", category=" + category + "]";
+		return "Habit [id=" + id + ", name=" + name + ", description=" + description + ", category=" + category
+				+ ", difficulty=" + difficulty + "]";
 	}
+
 
 }

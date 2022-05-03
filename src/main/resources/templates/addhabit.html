@@ -1,28 +1,53 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Habits</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Habit-Tracker</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>
+h1 {
+	text-align: center;
+	color: #FFFFFF;
+}
+
+body {
+	background-color: #333;
+}
+label{
+	color: #FFFFFF
+}
+</style>
 </head>
 <body>
 	<h1>Add Habit</h1>
-	<div>
-		<form  th:object="${habit}" th:action="@{save}" action="#" method="post">
-		  	<label for="hname">Name</label>
-			<input type="text" id="hname" th:field="*{name}" />
+	
+	<div style="margin-left: 20%; margin-right: 20%;">
+		<form th:object="${habit}" th:action="@{save}" action="#"
+			method="post">
+			
+			<label for="hname">Name</label> <input type="text" id="hname"
+				th:field="*{name}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
-		  	<label for="hDescription">Description</label>
-			<input type="text" id="hDescription" th:field="*{description}" />
+			
+			<label for="hDescription">Description</label> <input type="text"
+				id="hDescription" th:field="*{description}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
-			<label for="catlist">Category</label>
-			<select id="catlist" th:field="*{category.categoryid}" class="form-control">
-				<option
-					th:each="cat: ${categories}"
-					th:value="${cat.categoryid}"
-					th:text="${cat.name}"
-					></option>
-					</select>
-			<input type="submit" value="Save"></input>
+			
+			<label for="catlist">Category</label> <select id="catlist"
+				th:field="*{category.categoryid}" class="form-control">
+				<option th:each="cat: ${categories}" th:value="${cat.categoryid}"
+					th:text="${cat.name}"></option></select> 
+			
+			<label for="difflist">Difficulty</label> <select id="difflist"
+				th:field="*{difficulty.difficultyid}" class="form-control">
+				<option th:each="diff: ${difficulties}"
+					th:value="${diff.difficultyid}" th:text="${diff.name}"></option>
+			</select> 
+			
+			<input class="btn btn-success" style="margin-top: 20px" type="submit" value="Save"></input>
 		</form>
 	</div>
 </body>

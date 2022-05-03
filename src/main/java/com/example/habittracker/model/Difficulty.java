@@ -12,29 +12,29 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Category {
+public class Difficulty {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-	private Long categoryid;
+	private Long difficultyid;
 	private String name;
 	
 	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "difficulty")
 	private List<Habit> habits;
 	
-	public Category() {}
+	public Difficulty() {}
 	
-	public Category(String name) {
+	public Difficulty(String name) {
 		super();
 		this.name = name;
 	}
 
-	public Long getCategoryid() {
-		return categoryid;
+	public Long getDifficultyid() {
+		return difficultyid;
 	}
 
-	public void setCategoryid(Long categoryid) {
-		this.categoryid = categoryid;
+	public void setDifficultyid(Long difficultyid) {
+		this.difficultyid = difficultyid;
 	}
 
 	public String getName() {

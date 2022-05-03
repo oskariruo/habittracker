@@ -1,6 +1,5 @@
 package com.example.habittracker.web;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,12 +11,15 @@ import com.example.habittracker.model.User;
 import com.example.habittracker.model.UserRepository;
 
 
+//used by spring security to authenticate and authorize user
+
+
 @Service
-public class UserDetailServiceImp implements UserDetailsService  {
+public class UserDetailServiceImpl implements UserDetailsService  {
 	private final UserRepository repository;
 
 	@Autowired
-	public UserDetailServiceImp(UserRepository userRepository) {
+	public UserDetailServiceImpl(UserRepository userRepository) {
 		this.repository = userRepository;
 	}
 
